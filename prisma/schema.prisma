@@ -61,9 +61,9 @@ enum CommentStatus {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
@@ -75,7 +75,7 @@ model User {
   phone  String?
   status String? @default("ACTIVE")
 
-  @@unique([email])
+  
   @@map("user")
 }
 
@@ -96,7 +96,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id 
   accountId             String
   providerId            String
   userId                String
